@@ -1,10 +1,12 @@
 import { createGlobalStyle } from 'styled-components';
 
+import '../fonts/stylesheet.css';
+
 const BaseStyle = createGlobalStyle`
     :root{
         --font-size-px: 18;
-
         --box: 2000px;
+        --text-box: 10rem;
     }
 
     html{
@@ -23,7 +25,7 @@ const BaseStyle = createGlobalStyle`
 
     html, body{
         color: black;
-        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        font-family: 'anime', 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
         max-width: 100vw;
         min-height: 100vh;
         overflow: hidden;
@@ -82,6 +84,7 @@ const BaseStyle = createGlobalStyle`
         width: var(--box);
         height: var(--box);
         position: relative;
+        overflow: hidden;
     }
 
     a,
