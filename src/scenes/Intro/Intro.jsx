@@ -6,6 +6,7 @@ import TextBox from '../../components/TextBox';
 import bg from './img/bg.png';
 import kid from './img/kid.png';
 import dialogs from './dialogs';
+import Select from '../../components/Select';
 
 const AnimatedSection = styled(animated.section)``;
 
@@ -33,6 +34,8 @@ const Intro = () => {
                 {startText && (
                     <MagicText text={dialogs[currentDialog]}></MagicText>
                 )}
+
+                <Select options={['changua', 'caldo']} />
             </TextBox>
         </AnimatedSection>
     );

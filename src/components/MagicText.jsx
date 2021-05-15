@@ -6,6 +6,13 @@ const MagicText = ({ text: propText, speed = 70 }) => {
     const [step, setStep] = useState(-2);
 
     useEffect(() => {
+        if (visible) {
+            setText('');
+            setStep(-2);
+        }
+    }, [visible, propText]);
+
+    useEffect(() => {
         setVisible(true);
     }, [setVisible]);
 

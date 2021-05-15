@@ -1,12 +1,5 @@
-const dialogs = [
-    `... habia una vez trus`,
-    `...`,
-    `- ¿Qué es ese sonido?`,
-    ``,
-    ``,
-    ``,
-    ``,
-    ``,
-];
+const dialogs = [``];
+
+const options = [``];
 
 export default dialogs;

@@ -1,16 +1,17 @@
 import { createGlobalStyle } from 'styled-components';
+import { FONT_SIZE } from '../constants';
 
 import '../fonts/stylesheet.css';
 
 const BaseStyle = createGlobalStyle`
     :root{
-        --font-size-px: 18;
+        --font-size-px: ${FONT_SIZE};
         --box: 2000px;
         --text-box: 10rem;
     }
 
     html{
-        font-size: 36px;
+        font-size: calc(var(--font-size-px) * 1px);
     }
 
     body{
