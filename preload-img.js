@@ -5,8 +5,6 @@ const options = {
     cwd: `${__dirname}/src/scenes`, //Folder path
 };
 
-console.log(options.cwd);
-
 glob('**/*.png', options, (err, files) => {
     fs.writeFileSync(
         'src/imgs.js',
