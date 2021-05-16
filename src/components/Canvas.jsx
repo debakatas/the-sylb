@@ -41,7 +41,7 @@ const Canvas = () => {
     const [finalF, setFinalF] = useLocalStorage('finalF', 0);
     const [finalL, setFinalL] = useLocalStorage('finalL', 0);
 
-    const Step = steps[step];
+    const Step = steps[step] || Intro;
 
     useEffect(() => {
         const min = Math.min(width, height);
