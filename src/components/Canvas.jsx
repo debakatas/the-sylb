@@ -6,6 +6,8 @@ import KidCries from '../scenes/KidCries/KidCries';
 import ScareZoom from '../scenes/ScareZoom/ScareZoom';
 import WindowDeath from '../scenes/WindowDeath/WindowDeath';
 import TextIntro from '../scenes/TextIntro/TextIntro';
+import FinalF from '../scenes/FinalF/FinalF';
+import Thanks from '../scenes/Thanks/Thanks';
 import useLocalStorage from 'use-local-storage-state';
 
 const MagicCanvas = styled.main`
@@ -25,13 +27,15 @@ const steps = {
     ScareZoom,
     WindowDeath,
     TextIntro,
+    FinalF,
+    Thanks,
 };
 
 const Canvas = () => {
     const { width, height } = useScreenSize();
     const [scale, setScale] = useState(1);
     // const [step, setStep] = useLocalStorage('step', 'Intro');
-    const [step, setStep] = useState('Intro');
+    const [step, setStep] = useState('FinalF');
     const [finalF, setFinalF] = useLocalStorage('finalF', 0);
     const [finalL, setFinalL] = useLocalStorage('finalL', 0);
 

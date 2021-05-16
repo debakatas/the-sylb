@@ -11,7 +11,15 @@ const AnimatedSection = styled(animated.section)`
             : ''}
 `;
 
-const Scene = ({ children, bg, onShow, out = false, onOut }) => {
+const Scene = ({
+    children,
+    bg,
+    onShow,
+    out = false,
+    onOut,
+    style = {},
+    ...props
+}) => {
     const screenAppear = useSpring({
         from: { opacity: 0 },
         to: { opacity: 1 },
@@ -35,8 +43,9 @@ const Scene = ({ children, bg, onShow, out = false, onOut }) => {
 
     return (
         <AnimatedSection
-            style={{ '--bg': `url(${bg})`, ...screenAppear }}
+            style={{ '--bg': `url(${bg})`, ...screenAppear, ...style }}
             out={out}
+            {...props}
         >
             {children}
         </AnimatedSection>
