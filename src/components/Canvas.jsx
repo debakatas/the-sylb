@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import useScreenSize from '../hooks/useScreenSize';
 import Intro from '../scenes/Intro/Intro';
+import KidCries from '../scenes/KidCries/KidCries';
+import ScareZoom from '../scenes/ScareZoom/ScareZoom';
+import useLocalStorage from 'use-local-storage-state';
 
 const MagicCanvas = styled.main`
     width: var(--box);
@@ -15,13 +18,17 @@ const MagicCanvas = styled.main`
 `;
 
 const steps = {
-    1: Intro,
+    Intro,
+    KidCries,
+    ScareZoom,
 };
 
 const Canvas = () => {
     const { width, height } = useScreenSize();
     const [scale, setScale] = useState(1);
-    const [step, setStep] = useState(1);
+    const [step, setStep] = useLocalStorage('step', 'Intro');
+    const [finalF, setFinalF] = useLocalStorage('finalF', 0);
+    const [finalL, setFinalL] = useLocalStorage('finalL', 0);
 
     const Step = steps[step];
 
@@ -33,7 +40,7 @@ const Canvas = () => {
 
     return (
         <MagicCanvas style={{ transform: `scale(${scale})` }}>
-            <Step />
+            <Step {...{ setFinalF, setStep, setFinalL, finalF, finalL }} />
         </MagicCanvas>
     );
 };

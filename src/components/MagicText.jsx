@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-const MagicText = ({ text: propText, speed = 70 }) => {
+const MagicText = ({ text: propText, speed = 70, onDone }) => {
     const [visible, setVisible] = useState(false);
     const [text, setText] = useState('');
     const [step, setStep] = useState(-2);
@@ -22,6 +22,10 @@ const MagicText = ({ text: propText, speed = 70 }) => {
                 setText((prev) => `${prev}${propText[step + 1] || ''}`);
                 setStep((prev) => prev + 1);
             }, speed);
+        }
+
+        if (text.length === propText.length) {
+            onDone?.();
         }
     }, [step, visible]);
 

@@ -9,7 +9,7 @@ const StyledOption = styled.div`
         width: 1rem;
         height: 1rem;
         border-radius: 50%;
-        border: 0.2rem solid white;
+        border: 0.2rem solid currentColor;
         display: inline-block;
         position: relative;
         top: 0.3rem;
@@ -23,15 +23,25 @@ const StyledOption = styled.div`
                   `
                 : ''}
     }
+
+    ${({ selected, final }) =>
+        selected && final
+            ? css`
+                  color: yellow;
+              `
+            : ''}
 `;
 
 const changeKeys = { ArrowUp: 1, ArrowDown: -1 };
 
-const Select = ({ options }) => {
+const Select = ({ options, onSelect }) => {
     const [pre, setPre] = useState(0);
+    const [final, setFinal] = useState(false);
 
     useEffect(() => {
         const listener = (e) => {
+            if (final) return;
+
             const modifier = changeKeys[e.code];
 
             if (modifier) {
@@ -52,37 +62,36 @@ const Select = ({ options }) => {
         document.addEventListener('keyup', listener);
 
         return () => document.removeEventListener('keyup', listener);
-    }, [setPre, options.length]);
+    }, [setPre, options.length, final]);
 
     useEffect(() => {
         const listener = (e) => {
-            const modifier = changeKeys[e.code];
-
             if (e.code === 'Enter') {
-                setPre((previous) => {
-                    let update = previous + modifier;
-
-                    if (update >= 0 && update < options.length) {
-                        return update;
-                    }
-
-                    if (update < 0) return options.length - 1;
-
-                    return 0;
-                });
+                setFinal(true);
             }
         };
 
         document.addEventListener('keyup', listener);
 
         return () => document.removeEventListener('keyup', listener);
-    }, [setPre, options.length]);
+    }, [setFinal]);
+
+    useEffect(() => {
+        if (final) {
+            console.log('imgggas');
+
+            setTimeout(() => {
+                console.log(1123);
+                onSelect?.(pre);
+            }, 3000);
+        }
+    }, [final, pre]);
 
     return (
         <>
             {options.map((o, index) => (
-                <StyledOption selected={index === pre} key={o}>
-                    {o}
+                <StyledOption selected={index === pre} key={o} final={final}>
+                    <label>{o}</label>
                 </StyledOption>
             ))}
         </>
