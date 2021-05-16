@@ -86,6 +86,7 @@ const BaseStyle = createGlobalStyle`
         height: var(--box);
         position: relative;
         overflow: hidden;
+        background-repeat: no-repeat;
     }
 
     a,

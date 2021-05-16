@@ -1,79 +1,107 @@
-import { useSpring } from '@react-spring/core';
 import React, { useEffect, useState } from 'react';
-import Box from '../../components/Box';
 import Img from '../../components/Img';
 import MagicText from '../../components/MagicText';
 import Scene from '../../components/Scene';
 import TextBox from '../../components/TextBox';
-import useVolume from '../../hooks/useVolume';
+
+import top from './img/1/top.png';
+import man from './img/1/senor.png';
 import useWhistle from '../../hooks/useWhistle';
+import Select from '../../components/Select';
 
-import scream from '../../sounds/scream.mp3';
+import bg from './img/2/mesa.png';
+import man2 from './img/2/papa.png';
+import top2 from './img/2/top.png';
 
-import bg from './img/bg.png';
-import ghost from './img/fantasma.png';
-
-const FinalL = ({ setStep }) => {
+const Blank = ({ setStep }) => {
     const [visible, setVisible] = useState(false);
+    const [volume, setVolume] = useState(0.8);
+    const [textReady, setTextReady] = useState(false);
+    const [manReady, setManReady] = useState(false);
+    const [first, setFirst] = useState(true);
 
-    const [grow, api] = useSpring(() => ({
-        from: { scale: 0.5, translateY: 0 },
-    }));
-
-    const {
-        play: playWhistle,
-        isPlaying,
-        volumeDown,
-    } = useWhistle({
-        volume: 0.8,
-        interrupt: false,
-    });
-    const { play: playScream } = useVolume(scream, { volume: 1 });
+    const { play, volumeDown, isPlaying } = useWhistle({ volume, loop: true });
 
     useEffect(() => {
-        if (visible) {
-            playWhistle();
-        }
-    }, [visible, playWhistle]);
+        play();
+    }, [play]);
 
     useEffect(() => {
         if (isPlaying) {
             setTimeout(() => {
-                volumeDown(1300);
+                setVolume(0.6);
+            }, 400);
 
-                setTimeout(() => {
-                    setStep('Thanks');
-                }, 2000);
+            setTimeout(() => {
+                setVolume(0.4);
+            }, 800);
+
+            setTimeout(() => {
+                setVolume(0.2);
+            }, 1200);
+        }
+    }, [isPlaying]);
+
+    useEffect(() => {
+        if (!first) {
+            setTimeout(() => {
+                setManReady(true);
             }, 1000);
         }
-    }, [isPlaying, volumeDown]);
+    }, [first]);
 
     return (
         <Scene
-            bg={bg}
-            onShow={() => {
-                setVisible(true);
-            }}
-            style={{ backgroundPosition: 'center -390px' }}
+            onShow={() => setVisible(true)}
+            style={{ backgroundColor: '#c2c2c2' }}
         >
-            {visible && (
-                <Box style={grow}>
-                    <Img
-                        fadeIn
-                        src={ghost}
-                        onRest={() => {
-                            api.start({ scale: 1.5, translateY: 120 });
-                            playScream();
-                        }}
-                    ></Img>
-                </Box>
+            {first ? (
+                <>
+                    {visible && <Img fadeIn src={man}></Img>}
+                    <Img src={top}></Img>
+                </>
+            ) : (
+                <>
+                    <Img fadeIn src={bg}></Img>
+                    {manReady && <Img fadeIn src={man2}></Img>}
+                    <Img fadeIn src={top2}></Img>
+                </>
             )}
 
             <TextBox>
-                <MagicText text="..."></MagicText>
+                {visible && first && (
+                    <MagicText
+                        onDone={() => {
+                            setTextReady(true);
+                        }}
+                        text="The closer the further, the further the closer, but what about if I can't hear it?"
+                    ></MagicText>
+                )}
+
+                {manReady && (
+                    <MagicText
+                        onDone={() => {
+                            setTimeout(() => {
+                                volumeDown();
+                                setStep('Thanks');
+                            }, 2000);
+                        }}
+                        text="Who said you hear that with your ears?"
+                    ></MagicText>
+                )}
+
+                <br />
+                <br />
+
+                {textReady && first && (
+                    <Select
+                        options={['Silence the noise', 'Silence the noise']}
+                        onSelect={() => setFirst(false)}
+                    ></Select>
+                )}
             </TextBox>
         </Scene>
     );
 };
 
-export default FinalL;
+export default Blank;
