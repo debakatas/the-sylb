@@ -13,10 +13,10 @@ glob('**/*.png', options, (err, files) => {
         files
             .map(
                 (f, index) =>
-                    `
-export { default as img${index} } from './scenes/${f}';
-    `
+                    `export { default as img${
+                        index + 1
+                    } } from './scenes/${f}';`
             )
-            .join('')
+            .join('\n')
     );
 });
