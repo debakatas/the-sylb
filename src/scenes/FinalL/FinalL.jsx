@@ -62,8 +62,8 @@ const Blank = ({ setStep }) => {
                 </>
             ) : (
                 <>
-                    <Img fadeIn src={bg}></Img>
                     {manReady && <Img fadeIn src={man2}></Img>}
+                    <Img fadeIn src={bg}></Img>
                     <Img fadeIn src={top2}></Img>
                 </>
             )}

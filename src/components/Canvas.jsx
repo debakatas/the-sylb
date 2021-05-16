@@ -36,8 +36,7 @@ const steps = {
 const Canvas = () => {
     const { width, height } = useScreenSize();
     const [scale, setScale] = useState(1);
-    // const [step, setStep] = useLocalStorage('step', 'Intro');
-    const [step, setStep] = useState('Intro');
+    const [step, setStep] = useLocalStorage('step', 'Intro');
     const [finalF, setFinalF] = useLocalStorage('finalF', 0);
     const [finalL, setFinalL] = useLocalStorage('finalL', 0);
 
