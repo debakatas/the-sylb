@@ -13,6 +13,7 @@ const Thanks = ({ setStep }) => {
 
     useKeyboardKey('Enter', () => {
         if (textReady) {
+            localStorage.clear();
             setStep('Intro');
         }
     });

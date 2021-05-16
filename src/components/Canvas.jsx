@@ -7,6 +7,7 @@ import ScareZoom from '../scenes/ScareZoom/ScareZoom';
 import WindowDeath from '../scenes/WindowDeath/WindowDeath';
 import TextIntro from '../scenes/TextIntro/TextIntro';
 import FinalF from '../scenes/FinalF/FinalF';
+import FinalL from '../scenes/FinalL/FinalL';
 import Thanks from '../scenes/Thanks/Thanks';
 import useLocalStorage from 'use-local-storage-state';
 
@@ -28,6 +29,7 @@ const steps = {
     WindowDeath,
     TextIntro,
     FinalF,
+    FinalL,
     Thanks,
 };
 
