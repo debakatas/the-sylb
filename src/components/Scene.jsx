@@ -3,12 +3,10 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 
 const AnimatedSection = styled(animated.section)`
-    opacity: 1;
-
     ${({ out }) =>
         out
             ? css`
-                  opacity: 0;
+                  opacity: 0 !important;
               `
             : ''}
 `;
@@ -18,7 +16,7 @@ const Scene = ({ children, bg, onShow, out = false }) => {
         from: { opacity: 0 },
         to: { opacity: 1 },
         delay: 300,
-        onRest: onShow?.(),
+        onResolve: onShow?.(),
     });
 
     return (

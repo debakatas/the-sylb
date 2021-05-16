@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const MagicText = ({ text: propText, speed = 70, onDone }) => {
     const [visible, setVisible] = useState(false);

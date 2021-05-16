@@ -15,7 +15,11 @@ const StyledDiv = styled.div`
 `;
 
 const TextBox = ({ children }) => {
-    return <StyledDiv>{children}</StyledDiv>;
+    return (
+        <StyledDiv>
+            <div>{children}</div>
+        </StyledDiv>
+    );
 };
 
 export default TextBox;

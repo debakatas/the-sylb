@@ -1,6 +1,5 @@
-import { animated, useSpring } from '@react-spring/web';
+import { useSpring } from '@react-spring/web';
 import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
 import MagicText from '../../components/MagicText';
 import TextBox from '../../components/TextBox';
 import bg from './img/bg.png';
@@ -11,12 +10,7 @@ import Select from '../../components/Select';
 import whistle from '../../sounds/whistle.mp3';
 import useVolume from '../../hooks/useVolume';
 import Scene from '../../components/Scene';
-
-const AnimatedImg = styled(animated.img)`
-    position: absolute;
-    bottom: 0;
-    left: 0;
-`;
+import Img from '../../components/Img';
 
 const Intro = ({ setStep, setFinalF, setFinalL }) => {
     const [startText, setStartText] = useState(false);
@@ -41,11 +35,13 @@ const Intro = ({ setStep, setFinalF, setFinalL }) => {
         },
     });
 
-    const nextScreen = (finalL) => {
+    const nextScreen = (choosen) => {
+        const sendToRoom = choosen === 0;
+
         setOut(true);
 
         setTimeout(() => {
-            if (finalL) {
+            if (sendToRoom) {
                 setFinalL((prev) => prev + 1);
                 setStep('KidCries');
             } else {
@@ -72,28 +68,26 @@ const Intro = ({ setStep, setFinalF, setFinalL }) => {
 
     return (
         <Scene bg={bg} out={out} onShow={() => setKidStart(true)}>
-            {kidStart && <AnimatedImg src={kid} style={kidAppear} />}
+            {kidStart && <Img src={kid} style={kidAppear} />}
             <TextBox>
-                <div>
-                    {startText && (
-                        <MagicText
-                            text={dialogs.firstQuestion.text}
-                            onDone={() => setQuestionStart(true)}
-                        ></MagicText>
-                    )}
+                {startText && (
+                    <MagicText
+                        text={dialogs.firstQuestion.text}
+                        onDone={() => setQuestionStart(true)}
+                    ></MagicText>
+                )}
 
-                    <br />
-                    <br />
+                <br />
+                <br />
 
-                    {questionStart && (
-                        <div style={fadeIn}>
-                            <Select
-                                options={dialogs.firstQuestion.options}
-                                onSelect={nextScreen}
-                            ></Select>
-                        </div>
-                    )}
-                </div>
+                {questionStart && (
+                    <div style={fadeIn}>
+                        <Select
+                            options={dialogs.firstQuestion.options}
+                            onSelect={nextScreen}
+                        ></Select>
+                    </div>
+                )}
             </TextBox>
         </Scene>
     );
