@@ -8,8 +8,6 @@ const useScreenSize = () => {
 
     useEffect(() => {
         const listener = () => {
-            console.log('aaa');
-
             setSize({
                 width: window.innerWidth,
                 height: window.innerHeight,

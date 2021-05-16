@@ -78,10 +78,7 @@ const Select = ({ options, onSelect }) => {
 
     useEffect(() => {
         if (final) {
-            console.log('imgggas');
-
             setTimeout(() => {
-                console.log(1123);
                 onSelect?.(pre);
             }, 3000);
         }
