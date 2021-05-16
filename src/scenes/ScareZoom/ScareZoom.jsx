@@ -4,9 +4,9 @@ import MagicText from '../../components/MagicText';
 import Scene from '../../components/Scene';
 import TextBox from '../../components/TextBox';
 import useVolume from '../../hooks/useVolume';
-import bg from '../../scenes/Intro/img/bg.png';
 import whistle from '../../sounds/whistle.mp3';
 
+import top from './img/top.png';
 import man from './img/scared-man.png';
 
 const ScareZoom = () => {
@@ -14,8 +14,9 @@ const ScareZoom = () => {
     const { play, volumeDown } = useVolume(whistle);
 
     return (
-        <Scene bg={bg} onShow={() => setVisible(true)}>
-            <Img src={man}></Img>
+        <Scene onShow={() => setVisible(true)}>
+            <Img src={man} />
+            <Img src={top} />
 
             <TextBox>
                 {visible && (
